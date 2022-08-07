@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="./css/bootstrap.css">
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <title>Document</title>
 </head>
@@ -51,59 +50,15 @@
     <div class="container">
 
       <!-- Three columns of text below the carousel -->
-      <div class="row">
+      <div id="notes" class="row">
 
-        <!-- note card -->
-        <div class="col-sm-6 col-md-4 col-lg-3 my-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Button</a>
-            </div>
-          </div>
-        </div><!-- note card -->
-        <!-- note card -->
-        <div class="col-sm-6 col-md-4 col-lg-3 my-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Button</a>
-            </div>
-          </div>
-        </div><!-- note card -->
-        <!-- note card -->
-        <div class="col-sm-6 col-md-4 col-lg-3 my-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Button</a>
-            </div>
-          </div>
-        </div><!-- note card -->
-        <!-- note card -->
-        <div class="col-sm-6 col-md-4 col-lg-3 my-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Button</a>
-            </div>
-          </div>
-        </div><!-- note card -->
+        <div class="col">
 
-        <!-- note card -->
-        <div class="col-sm-6 col-md-4 col-lg-3 my-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Button</a>
-            </div>
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
           </div>
-        </div><!-- note card -->
+        </div>
+
 
 
 
@@ -116,13 +71,45 @@
 
   </main>
 
-
-
-  <script src="./js/bootstrap.bundle.js"></script>
-  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="./js/jquery-3.6.0.min.js"></script>
   <!-- <script src="./js/jquery.validate.min.js"></script> -->
   <script>
+
+$.ajax({
+      url: 'rest/notes',
+      type: 'GET',
+      success: function (result) {
+        console.log(result);
+        // do something with the result
+        // $('#note_title').html(result[0].name);
+        // $('#note_description').html(result[0].desc);
+
+        var html = "";
+        for(var i=0; i<result.length; i++) {
+          html += `
+        
+        <!-- note card -->
+        <div class="col-sm-6 col-md-4 col-lg-3 my-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 id="note_title" class="card-title">`+result[i].name+`</h5>
+              <p id="note_description" class="card-text">`+result[i].desc+`</p>
+              <a href="" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        </div><!-- note card -->
+
+        `;
+        }
+        $('#notes').html(html);
+        
+      },
+      error: function () {
+        console.log("something went wrong");
+      }
+    });
+    
 
   </script>
 </body>
