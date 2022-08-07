@@ -24,4 +24,12 @@ class NoteDao
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function delete($id)
+    {
+        $stmt = $this->conn->prepare("DELETE FROM notes WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+        $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return "deleted successfully";
+    }
+
 }

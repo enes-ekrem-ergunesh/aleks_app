@@ -73,43 +73,44 @@
 
   <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="./js/jquery-3.6.0.min.js"></script>
-  <!-- <script src="./js/jquery.validate.min.js"></script> -->
+  <script src="./js/jquery.validate.min.js"></script>
+  <script src="./js/noteService.js"></script>
   <script>
 
-$.ajax({
-      url: 'rest/notes',
-      type: 'GET',
-      success: function (result) {
-        console.log(result);
-        // do something with the result
-        // $('#note_title').html(result[0].name);
-        // $('#note_description').html(result[0].desc);
+    // $.ajax({
+    //       url: 'rest/notes',
+    //       type: 'GET',
+    //       success: function (result) {
+    //         console.log(result);
+    //         // do something with the result
+    //         // $('#note_title').html(result[0].name);
+    //         // $('#note_description').html(result[0].desc);
 
-        var html = "";
-        for(var i=0; i<result.length; i++) {
-          html += `
-        
-        <!-- note card -->
-        <div class="col-sm-6 col-md-4 col-lg-3 my-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 id="note_title" class="card-title">`+result[i].name+`</h5>
-              <p id="note_description" class="card-text">`+result[i].desc+`</p>
-              <a href="" class="btn btn-primary">Button</a>
-            </div>
-          </div>
-        </div><!-- note card -->
+    //         var html = "";
+    //         for(var i=0; i<result.length; i++) {
+    //           html += `
 
-        `;
-        }
-        $('#notes').html(html);
-        
-      },
-      error: function () {
-        console.log("something went wrong");
-      }
-    });
-    
+    //         <!-- note card -->
+    //         <div class="col-sm-6 col-md-4 col-lg-3 my-3">
+    //           <div class="card">
+    //             <div class="card-body">
+    //               <h5 id="note_title" class="card-title">`+result[i].name+`</h5>
+    //               <p id="note_description" class="card-text">`+result[i].desc+`</p>
+    //               <a href="" class="btn btn-primary">Button</a>
+    //             </div>
+    //           </div>
+    //         </div><!-- note card -->
+
+    //         `;
+    //         }
+    //         $('#notes').html(html);
+
+    //       },
+    //       error: function () {
+    //         console.log("something went wrong");
+    //       }
+    //     });
+    NoteService.get();
 
   </script>
 </body>
