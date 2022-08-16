@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="./css/bootstrap.min.css">
-  <title>Document</title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+  <title>Aleks App</title>
 </head>
 
 <body>
@@ -41,18 +42,19 @@
 
   <main style="margin-top: 5rem;">
 
-
-
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-
     <div class="container">
+      <div class="row">
+        <div class="col">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNoteModal">
+            Add Note
+          </button>
+        </div>
+      </div>
 
       <!-- Three columns of text below the carousel -->
       <div id="notes" class="row">
 
-        <div class="col">
+        <div class="col" style="margin-top: 10px;">
 
           <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -71,45 +73,41 @@
 
   </main>
 
-  <script src="./js/bootstrap.bundle.min.js"></script>
-  <script src="./js/jquery-3.6.0.min.js"></script>
-  <script src="./js/jquery.validate.min.js"></script>
+  <modals>
+    <div class="modal fade" id="addNoteModal" tabindex="-1" aria-labelledby="addNoteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="addNoteModalLabel">Add Note</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            <h4>Modal Body</h4>
+            <p>We are going to add our form here...</p>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </modals>
+
+  <js_import>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script src="./js/jquery.validate.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  </js_import>
+
   <script src="./js/noteService.js"></script>
+
   <script>
 
-    // $.ajax({
-    //       url: 'rest/notes',
-    //       type: 'GET',
-    //       success: function (result) {
-    //         console.log(result);
-    //         // do something with the result
-    //         // $('#note_title').html(result[0].name);
-    //         // $('#note_description').html(result[0].desc);
-
-    //         var html = "";
-    //         for(var i=0; i<result.length; i++) {
-    //           html += `
-
-    //         <!-- note card -->
-    //         <div class="col-sm-6 col-md-4 col-lg-3 my-3">
-    //           <div class="card">
-    //             <div class="card-body">
-    //               <h5 id="note_title" class="card-title">`+result[i].name+`</h5>
-    //               <p id="note_description" class="card-text">`+result[i].desc+`</p>
-    //               <a href="" class="btn btn-primary">Button</a>
-    //             </div>
-    //           </div>
-    //         </div><!-- note card -->
-
-    //         `;
-    //         }
-    //         $('#notes').html(html);
-
-    //       },
-    //       error: function () {
-    //         console.log("something went wrong");
-    //       }
-    //     });
     NoteService.get();
 
   </script>
