@@ -32,13 +32,12 @@ class NoteDao
         return reset($result); //result[0];
     }
 
-    public function add()
+    public function add($entity)
     {
-        $stmt = $this->conn->prepare("INSERT INTO notes (name, desc) 
-        VALUES ('test', 'test')");
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC); //[] || [sth]
-        return reset($result); //result[0];
+        $stmt = $this->conn->prepare("INSERT INTO notes (name, description) VALUES (:name, :description)");
+        $stmt->execute([':name' => $entity["name"], ':description' => $entity["description"]]);
+        $stmt->fetchAll(PDO::FETCH_ASSOC); //[] || [sth]
+        return "added successfully!";
     }
 
     public function update($id)

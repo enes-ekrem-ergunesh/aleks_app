@@ -11,8 +11,8 @@ Flight::route('GET /notes/@id', function($id){
 });
 
 // ADD single note
-Flight::route('POST /notes/@id', function($id){
-  Flight::json(Flight::noteDao()->add($id));
+Flight::route('POST /notes', function(){
+  Flight::json(Flight::noteDao()->add(Flight::request()->data->getData()));
 });
 
 // UPDATE single note

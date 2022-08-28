@@ -1,5 +1,15 @@
 var NoteService = {
 
+  init: function(){
+    $("#addNoteForm").validate({
+      submitHandler: function(form) {
+        var entity = Object.fromEntries((new FormData(form)).entries());
+        console.log(entity);
+        NoteService.add(entity);
+      }
+     });
+  },
+
   get: function () {
     $.ajax({
       url: 'rest/notes',
@@ -20,7 +30,14 @@ var NoteService = {
                 <div class="card-body">
                   <h5 id="note_title" class="card-title">`+ result[i].name + `</h5>
                   <p id="note_description" class="card-text">`+ result[i].desc + `</p>
-                  <button onclick="NoteService.delete(`+ result[i].id + `);" class="btn btn-primary">Button</button>
+                  <div class="row">
+                    <div class="col text-end">
+                      <div class="btn-group" role="group" aria-label="Basic mixed styles example" style="">
+                        <button type="button" class="btn btn-warning">Edit</button>
+                        <button onclick="NoteService.delete(`+ result[i].id + `);" class="btn btn-danger">Delete</button>
+                      </div>                  
+                    </div>
+                  </div>
                 </div>
               </div>
             </div><!-- note card -->
@@ -29,6 +46,22 @@ var NoteService = {
         }
         $('#notes').html(html);
 
+      },
+      error: function () {
+        console.log("something went wrong");
+      }
+    });
+  },
+
+  add: function (entity){    
+    $.ajax({
+      url: 'rest/notes',
+      type: 'POST',
+      data: JSON.stringify(entity),
+      contentType: "application/json",
+      dataType: "json",
+      success: function (result) {
+        console.log(result);
       },
       error: function () {
         console.log("something went wrong");

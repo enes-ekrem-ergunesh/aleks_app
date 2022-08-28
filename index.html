@@ -84,13 +84,25 @@
           </div>
 
           <div class="modal-body">
-            <h4>Modal Body</h4>
-            <p>We are going to add our form here...</p>
-          </div>
+            
+            <form id="addNoteForm" class="row g-3 needs-validation" novalidate>
 
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+              <div class="mb-3">
+                <label for="noteName" class="form-label">Name</label>
+                <input name="name" type="text" class="form-control" id="noteName">
+              </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Description</label>
+                <input name="desc" type="text" class="form-control" id="noteDescription">
+              </div>
+              
+            </div><!-- modal body -->
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
           </div>
         </div>
       </div>
@@ -108,6 +120,8 @@
 
   <script>
 
+    NoteService.init();
+    
     NoteService.get();
 
   </script>
